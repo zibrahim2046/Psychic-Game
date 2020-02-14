@@ -1,54 +1,66 @@
+// Made variable to define lower case alphabet
+
+var alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z"
+];
+
+// This section will log wins, losses, and guesses left
+
 var wins = 0;
 var losses = 0;
-var guesses = 9;
-var guessesLeft = 9;
-var guessedLetters = [];
-var compGuess = "";
+var guesses = 10;
 
-var characters = abcdefghijklmnopqrstuvwxyz
-var documentWins = document.getElementById("wins");
-var documentLosses = document.getElementById("losses");
-var documentGuessesLeft = document.getElementById("guessesLeft");
-var documentGuessesSoFar = document.getElementById("guessesSoFar");
+document.onkeyup = function() {
+  var userGuess = String.fromCharCode(event.keycode).toLowerCase();
+  if (userGuess == computerGuess) {
+    wins++;
+  } else {
+    losses++;
+  }
+};
 
-// Computer randomizes a letter a-z
+// Letter randomizer
 
 function randomLetter(length) {
   var result = '';
   
-  var charactersLength = characters.length;
+  var alphabetLength = alphabet.length;
   for (var i = 0; i < length; i++) {
-    result += characters(Math.floor(Math.random() * charactersLength));
+    result += characters(Math.floor(Math.random() * alphabetLength));
   }
-  compGuess = result;
-}
-randomLetter(1);
-console.log(compGuess);
 
-// User inputs a letter a-z
+// Html elements
 
-document.onkeyup = function(event) {
-  userGuess = event.key;
-  if (userGuess === compGuess) {
-    wins++;
-    documentWins.text(wins);
+var html = "<p>wins: " + wins + "</p>" +
+"<p>losses: " + losses + "</p>" +
+"<p>You have " + guesses + " guesses left.</p>";
+document.querySelector("#score").innerHTML = html;
 
-    alert("Correct!");
-  }
-};
+var letterGuesses = "<br><hr><h1>Your last guess was: " + userGuess + "</h1>";
 
-// User has 10 guesses to guess correctly
-
-// If user guesses incorrectly it is counted as a guess left -1, until user uses all 10 guesses
-
-
-
-// If user guesses correctly it is counted as a win +1
-
-// Track Guesses left, as well as guesses so far.
-
-// If user wins or loses, game resets with a new letter.
-var restart = function() {
-	guessesLeft = 9;
-	letterUser = [];
-}
+document.querySelector("#letterGuess").innerHTML = letterGuesses}
