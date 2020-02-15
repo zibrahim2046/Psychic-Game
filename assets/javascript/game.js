@@ -37,7 +37,7 @@ var newLetter = function() {
 console.log(alphabet)
 
 var soFar = function() {
-    document.getElementById("guesses").innerHTML = "Guesses so far: " + guessesSoFar.join(",");
+    document.getElementById("guesses").innerHTML = "Guesses so far: " + guessesSoFar.join(" ");
 };
 
 var guessesLeft = function() {
@@ -49,7 +49,8 @@ var newGame = function() {
     left = 9;
     newLetter();
     guessesLeft();
-    soFar();
+	soFar();
+	
 }
 
 document.onkeyup = function(event) {
