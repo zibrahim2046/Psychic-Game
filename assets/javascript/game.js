@@ -1,66 +1,72 @@
-// Made variable to define lower case alphabet
-
-var alphabet = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z"
-];
-
-// This section will log wins, losses, and guesses left
-
+var alphabet = ["a", 
+				"b", 
+				"c", 
+				"d", 
+				"e", 
+				"f", 
+				"g", 
+				"h", 
+				"i", 
+				"j", 
+				"k", 
+				"l", 
+				"m", 
+				"n", 
+				"o", 
+				"p", 
+				"q", 
+				"r", 
+				"s", 
+				"t", 
+				"u", 
+				"v", 
+				"x", 
+				"y", 
+				"z"];
 var wins = 0;
 var losses = 0;
-var guesses = 10;
+var left = 9;
+var guesses = 9;
+var guessesSoFar = [];
+var psychicLetter;
 
-document.onkeyup = function() {
-  var userGuess = String.fromCharCode(event.keycode).toLowerCase();
-  if (userGuess == computerGuess) {
-    wins++;
-  } else {
-    losses++;
-  }
+
+var newLetter = function() {
+    psychicLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+};
+console.log(alphabet)
+
+var soFar = function() {
+    document.getElementById("guesses").innerHTML = "Guesses so far: " + guessesSoFar.join(",");
 };
 
-// Letter randomizer
+var guessesLeft = function() {
+    document.getElementById("left").innerHTML = "Guesses Left: " + left;
+};
 
-function randomLetter(length) {
-  var result = '';
-  
-  var alphabetLength = alphabet.length;
-  for (var i = 0; i < length; i++) {
-    result += characters(Math.floor(Math.random() * alphabetLength));
-  }
+var newGame = function() {
+	guessedLetters = [];
+    left = 9;
+    newLetter();
+    guessesLeft();
+    soFar();
+}
 
-// Html elements
-
-var html = "<p>wins: " + wins + "</p>" +
-"<p>losses: " + losses + "</p>" +
-"<p>You have " + guesses + " guesses left.</p>";
-document.querySelector("#score").innerHTML = html;
-
-var letterGuesses = "<br><hr><h1>Your last guess was: " + userGuess + "</h1>";
-
-document.querySelector("#letterGuess").innerHTML = letterGuesses}
+document.onkeyup = function(event) {
+	var userGuess = event.key;
+    left--;
+    guessesSoFar.push(userGuess);
+    soFar();
+    guessesLeft();
+    if (left > 0) {
+        if (userGuess == psychicLetter) {
+        	wins++;
+        	document.getElementById("wins").innerHTML = "Wins:" + wins;
+            newGame();
+        }
+    } else if (left == 0) {
+    	losses++;
+    	document.getElementById("losses").innerHTML = "Losses:" + losses;
+        newGame();
+    }
+};
