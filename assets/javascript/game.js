@@ -1,3 +1,7 @@
+window.onload = function() {
+	this.newGame()
+}
+
 var alphabet = ["a", 
 				"b", 
 				"c", 
@@ -32,9 +36,10 @@ var psychicLetter;
 
 
 var newLetter = function() {
-    psychicLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+	psychicLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+	console.log(psychicLetter)
+
 };
-console.log(alphabet)
 
 var soFar = function() {
     document.getElementById("guesses").innerHTML = "Guesses so far: " + guessesSoFar.join(" ");
@@ -45,16 +50,17 @@ var guessesLeft = function() {
 };
 
 var newGame = function() {
-	guessedLetters = [];
+	guessesSoFar = [];
     left = 9;
     newLetter();
     guessesLeft();
 	soFar();
-	
 }
+
 
 document.onkeyup = function(event) {
 	var userGuess = event.key;
+
     left--;
     guessesSoFar.push(userGuess);
     soFar();
