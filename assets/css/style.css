@@ -3,3 +3,14 @@
     float: none; /* Added */
     margin-bottom: 10px; /* Added */
 }
+
+
+body {
+background-color: black;
+font-family: fantasy;
+}
+
+.card-body {
+    font-weight: bold;
+    text-align: center;
+}
